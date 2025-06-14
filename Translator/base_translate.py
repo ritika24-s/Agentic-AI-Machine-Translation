@@ -1,3 +1,25 @@
+from langcodes import *
+
+
+class LanguageExpansion:
+    language_expansion = {
+        "en_to_de": "expands",
+        "en_to_chinese": "contracts",
+    }
+
+    def check_language_code(self, language:str):
+        return Language.get(language).is_valid()
+
+    def check_language_expansion(self, source_language:str, target_language:str):
+        # check if the language is a valid language code otherwise convert it
+        if not self.check_language_code(source_language):
+            source_language_code = Language.get(source_language).language_code
+        if not self.check_language_code(target_language):
+            target_language_code = Language.get(target_language).language_code
+
+        return self.language_expansion.get(f"{source_language_code}_{target_language_code}")
+
+
 class TranslateText:
     def translate_text(self, data, source_lang, target_lang):
         pass
@@ -37,6 +59,15 @@ class TranslateText:
 class QualityEstimation:
     def length_difference(self, source_text:str, translated_text:str):
         return abs(len(source_text) - len(translated_text))
+    
+    def source_target_length_ratio(self, source_text:str, translated_text:str):
+        return len(source_text) / len(translated_text)
+    
+    def source_target_length_ratio_check(self, source_text:str, translated_text:str):
+        if self.source_target_length_ratio(source_text, translated_text) > 2.0 \
+            and self.source_target_length_ratio(source_text, translated_text) < 0.5:
+            return True
+        return False
     
     def check_confidence_score(self, translated_text:dict)->int:
         """
