@@ -5,7 +5,7 @@ Memory management: Update translation memory and conversation context
 Result formatting: Prepare user-friendly output with quality indicators
 Error coordination: Handle failures and route to appropriate recovery strategies
 """
-from Agents.States.translation_state import TranslationState
+from AgentArchitecture.States.translation_state import TranslationState
 
 
 def orchestrator_agent(state: TranslationState) -> dict:
@@ -22,11 +22,11 @@ def orchestrator_agent(state: TranslationState) -> dict:
         
         # Update translation memory for future consistency
         translation_memory = state.get("translation_memory", {})
-        translation_memory[state["current_text"]] = translated_text
+        translation_memory[state["source_text"]] = translated_text
         
         # Update conversation context
         conversation_context = state.get("conversation_context", [])
-        conversation_context.append(f"Source: {state['current_text']} → Target: {translated_text}")
+        conversation_context.append(f"Source: {state['source_text']} → Target: {translated_text}")
         
     else:
         # Quality issues detected

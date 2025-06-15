@@ -2,7 +2,7 @@
 This module contains the language detection node functions.
 """
 
-from Agents.States.translation_state import TranslationState
+from AgentArchitecture.States.translation_state import TranslationState
 from Translator.libre_translate import LibreTranslate
 
 def language_detection_node(state: TranslationState) -> dict:

@@ -39,3 +39,7 @@ run the application
 bash
 python main.py
 
+To only run the translation system, run the following command
+bash
+python AgentArchitecture/agent_workflow.py
+

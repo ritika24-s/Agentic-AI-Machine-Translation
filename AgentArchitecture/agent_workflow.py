@@ -6,14 +6,17 @@ Quality assurance: Automatic retry loops and human escalation
 Context awareness: Maintains consistency across conversations
 Error resilience: Multiple fallback strategies prevent failures
 """
+# Third-party imports
 from langgraph.graph import StateGraph, START, END
-from Agents.States.translation_state import TranslationState
-from Agents.Agents.router_agent import router_agent
-from Agents.Agents.context_manager_agent import context_manager_agent
-from Agents.Agents.translation_agent import translation_agent
-from Agents.Agents.qa_agent import qa_agent
-from Agents.Agents.orchestrator_agent import orchestrator_agent
-from Agents.States.conversation_state import ConversationState
+
+# Local imports
+from AgentArchitecture.States.translation_state import TranslationState, get_initial_translation_state
+from AgentArchitecture.States.conversation_state import ConversationState, get_initial_conversation_state
+from AgentArchitecture.Agents.router_agent import router_agent
+from AgentArchitecture.Agents.context_manager_agent import context_manager_agent
+from AgentArchitecture.Agents.translation_agent import translation_agent
+from AgentArchitecture.Agents.qa_agent import qa_agent
+from AgentArchitecture.Agents.orchestrator_agent import orchestrator_agent
 
 
 def decide_next_step(state: TranslationState) -> str:
@@ -32,10 +35,16 @@ def create_translation_system():
     
     # Create the workflow graph
     workflow = StateGraph(TranslationState)
+
+    # Wrap context manager to handle the conversation state
+    def context_manager_wrapper(state: TranslationState) -> dict:
+        # Create empty conversation state if needed
+        conversation_state = get_initial_conversation_state()
+        return context_manager_agent(state, conversation_state)
     
     # Add all agents
     workflow.add_node("router", router_agent)
-    workflow.add_node("context_manager", context_manager_agent)
+    workflow.add_node("context_manager", context_manager_wrapper)  # Use wrapper
     workflow.add_node("translator", translation_agent)
     workflow.add_node("qa_checker", qa_agent)
     workflow.add_node("orchestrator", orchestrator_agent)
@@ -60,17 +69,19 @@ def create_translation_system():
     
     return workflow.compile()
 
-# Create and test the system
-translation_system = create_translation_system()
 
-# Test translation
-initial_state = {
-    "messages": [],
-    "current_text": "Hello, how are you today?",
-    "target_language": "es",
-    "conversation_context": [],
-    "translation_memory": {}
-}
+if __name__ == "__main__":
+    # Create and test the system
+    translation_system = create_translation_system()
 
-result = translation_system.invoke(initial_state)
-print("Translation Result:", result["translation_summary"])
+    simple_data = {
+        "source_text": "Hello, how are you today?",
+        "source_language": "en",
+        "target_language": "es"
+    }
+
+    # Test translation
+    initial_state = get_initial_translation_state(simple_data)
+
+    result = translation_system.invoke(initial_state)
+    print("Translation Result:", result["translated_text"])

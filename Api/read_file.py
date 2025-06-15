@@ -28,3 +28,22 @@ def read_json_file(file_path:str):
             return df
 
 
+def map_json_to_translation_state(message_data: dict) -> dict:
+    """Convert JSON structure to TranslationState format"""
+    message = message_data["messages"][0] if message_data.get("messages") else {}
+    
+    return {
+        "messages": [],
+        "source_text": message.get("msg_o", message.get("msg", "")),
+        "source_language": message.get("source_lang", "auto"), 
+        "target_language": "es",  # or from request
+        "translated_text": "",
+        "confidence_score": 0.0,
+        "conversation_context": [],
+        "needs_human_review": False,
+        "error_messages": [],
+        # Add metadata for tracking
+        "original_message_id": str(message_data.get("_id", {}).get("$oid", "")),
+        "customer_name": message.get("name", ""),
+        "timestamp": message.get("ts", {}).get("$date", "")
+    }

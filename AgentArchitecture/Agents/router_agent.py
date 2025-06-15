@@ -1,7 +1,7 @@
 """
 The Router Agent is the system's traffic controller, deciding how to handle each translation request
 """
-from Agents.States.translation_state import TranslationState
+from AgentArchitecture.States.translation_state import TranslationState
 
 
 TECHNICAL_TERMS = ["api", "database", "algorithm", "function"]

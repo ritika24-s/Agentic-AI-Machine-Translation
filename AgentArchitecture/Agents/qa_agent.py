@@ -6,7 +6,7 @@ Strategy:
 - Human escalation: Complex issues automatically flagged for human review
 """
 
-from Agents.States.translation_state import TranslationState
+from AgentArchitecture.States.translation_state import TranslationState
 
 
 def qa_agent(translation_state: TranslationState) -> dict:
