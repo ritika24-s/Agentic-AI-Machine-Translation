@@ -12,3 +12,4 @@ __pycache__/
 
 messages.json
 .env
+.env.local
