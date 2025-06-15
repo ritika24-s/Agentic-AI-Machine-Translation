@@ -15,7 +15,7 @@ class LibreTranslate(TranslateText):
         'agent_decision': self.make_agent_decision(self.calculate_quality_metrics(data["value_o"], translated_text.get('translatedText')))
         }
     
-    def libre_translate(self, data:dict, source_language:str="auto", target_language:str="es"):
+    def libre_translate(self, data:dict, source_language:str="auto", target_language:str="es", detect_language:bool=False):
         """
         This function is used to make a post request to the libretranslate api.
         The response json received from the api is then modified and returned.
@@ -45,6 +45,10 @@ class LibreTranslate(TranslateText):
         headers={"Content-Type": "application/json"})
         response_json = res.json()
 
+        if detect_language:
+            return response_json.get("detectedLanguage")
+        else:
+            return response_json.get("translatedText")
 
     # def check_confidence_score(self, translated_text:dict):
     #     if translated_text.get("confidence") < 50:
