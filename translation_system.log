@@ -36,3 +36,13 @@
 2025-06-15 21:45:59,084 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2025 21:45:59] "[35m[1mPOST /translate HTTP/1.1[0m" 500 -
 2025-06-15 21:46:01,105 - monitoring - ERROR - Translation error: Object of type HumanMessage is not JSON serializable
 2025-06-15 21:46:01,105 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2025 21:46:01] "[35m[1mPOST /translate HTTP/1.1[0m" 500 -
+2025-06-15 21:46:14,028 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-15 21:46:14,028 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-15 21:46:14,031 - werkzeug - INFO -  * Restarting with stat
+2025-06-15 21:46:16,653 - werkzeug - WARNING -  * Debugger is active!
+2025-06-15 21:46:16,658 - werkzeug - INFO -  * Debugger PIN: 221-956-295
+2025-06-15 21:46:27,303 - monitoring - ERROR - Translation error: Object of type HumanMessage is not JSON serializable
+2025-06-15 21:46:27,303 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2025 21:46:27] "[35m[1mPOST /translate HTTP/1.1[0m" 500 -
+2025-06-15 21:46:29,335 - monitoring - ERROR - Translation error: Object of type HumanMessage is not JSON serializable
+2025-06-15 21:46:29,335 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2025 21:46:29] "[35m[1mPOST /translate HTTP/1.1[0m" 500 -
