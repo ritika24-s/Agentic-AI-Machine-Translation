@@ -1,17 +1,32 @@
 """
 The Translation Agent performs the core translation work using free services
-"""
-from AgentArchitecture.States.translation_state import TranslationState
-from Translator.translate_factory import TranslateFactory
-# from ..States.translation_state import TranslationState
-# from Translator.translate_factory import TranslateFactory
 
-def translate_libretranslate(source_text: str, source_language: str="auto", target_language: str="es") -> tuple[str, float]:
+Role: The "Polyglot Expert" - handles the actual translation with domain expertise.
+
+Multi-Service Strategy:
+- Service Cascading: Starts with free LibreTranslate, falls back to Google Translate, escalates to paid services for quality
+- Domain Specialization: Different approaches for medical, legal, technical, creative content
+- Quality-Speed Trade-offs: Fast mode for chat, precision mode for documents
+
+Domain Expertise Modules:
+- Medical: Recognizes drug names, symptoms, procedures - knows "MI" means myocardial infarction
+- Legal: Handles contract language, knows legal term precision is critical
+- Technical: Understands software terminology, API documentation, user manuals
+- Creative: Balances literal accuracy with emotional tone and cultural adaptation
+
+Innovation: Rather than one-size-fits-all, this agent has specialized "sub-brains" for different content types.
+"""
+from agent_architecture.States.translation_state import TranslationState
+from translation_services.translate_factory import TranslateFactory
+
+
+def translate_libretranslate(data: dict, source_language: str="auto", target_language: str="es") -> tuple[str, float]:
     """
     Function to instantiate LibreTranslate object and translate text using libretranslate
     """
     libre_translate = TranslateFactory().get_translate("libretranslate")
-    translated_text, confidence = libre_translate.translate_text(source_text, source_language, target_language)
+    translated_text, confidence = libre_translate.translate_text(data, source_language, target_language)
+    
     return translated_text, confidence
 
 def translation_agent(translation_state: TranslationState) -> dict:

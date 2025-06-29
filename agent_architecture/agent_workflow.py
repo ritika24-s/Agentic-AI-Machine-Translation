@@ -10,13 +10,13 @@ Error resilience: Multiple fallback strategies prevent failures
 from langgraph.graph import StateGraph, START, END
 
 # Local imports
-from AgentArchitecture.States.translation_state import TranslationState, get_initial_translation_state
-from AgentArchitecture.States.conversation_state import ConversationState, get_initial_conversation_state
-from AgentArchitecture.Agents.router_agent import router_agent
-from AgentArchitecture.Agents.context_manager_agent import context_manager_agent
-from AgentArchitecture.Agents.translation_agent import translation_agent
-from AgentArchitecture.Agents.qa_agent import qa_agent
-from AgentArchitecture.Agents.orchestrator_agent import orchestrator_agent
+from agent_architecture.States.translation_state import TranslationState, get_initial_translation_state
+from agent_architecture.States.conversation_state import ConversationState, get_initial_conversation_state
+from agent_architecture.Agents.router_agent import router_agent
+from agent_architecture.Agents.context_manager_agent import context_manager_agent
+from agent_architecture.Agents.translation_agent import translation_agent
+from agent_architecture.Agents.qa_agent import qa_agent
+from agent_architecture.Agents.orchestrator_agent import orchestrator_agent
 
 
 def decide_next_step(state: TranslationState) -> str:

@@ -1,10 +1,17 @@
 import requests
 from Translator.base_translate import TranslateText
+from monitoring.monitoring import setup_logging
 
+logger = setup_logging(__name__)
 
 class LibreTranslate(TranslateText):
+    def __init__(self):
+        self.base_url = "https://libretranslate.com/"
+        self.headers = {"Content-Type": "application/json"}
+
     def translate_text(self, data:dict, source_language:str="auto", target_language:str="es"):
         translated_text = self.libre_translate(data, source_language, target_language)
+        
         return {
         "source_language": source_language,
         "target_language": target_language,
@@ -36,19 +43,35 @@ class LibreTranslate(TranslateText):
 
         Returns:
         """
-        res = requests.post("https://libretranslate.com/translate", 
-        {
-            "q": data["value_o"] if data.get("value_o") else data["value"],
-            "source": data.get("source_lang", source_language),
-            "target": target_language,
-        }, 
-        headers={"Content-Type": "application/json"})
-        response_json = res.json()
+        try:
+            url = self.base_url + "translate"
+            payload = {
+                "q": data["value_o"] if data.get("value_o") else data["value"],
+                "source": data.get("source_lang", source_language),
+                "target": target_language,
+            }
+            res = requests.post(url,
+                                payload,
+                                headers=self.headers,
+                                timeout=10)
+            
+            res.raise_for_status()  # Raise exception for bad status codes
 
-        if detect_language:
-            return response_json.get("detectedLanguage")
-        else:
-            return response_json.get("translatedText")
+            response_json = res.json()
+            if detect_language:
+                return response_json.get("detectedLanguage")
+            else:
+                return response_json.get("translatedText")
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"LibreTranslate API error: {str(e)}")
+            return {"translatedText": "", "confidence": 0}
+            
+        except Exception as e:
+            logger.error(f"Error in libre_translate: {e}")
+            return {"translatedText": "", "confidence": 0}
+
+        
 
     # def check_confidence_score(self, translated_text:dict):
     #     if translated_text.get("confidence") < 50:

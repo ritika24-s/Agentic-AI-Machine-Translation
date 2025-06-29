@@ -1,4 +1,4 @@
-from AgentArchitecture.States.translation_state import TranslationState
+from agent_architecture.States.translation_state import TranslationState
 
 
 def target_language_node(state: TranslationState, target_language: str="es") -> dict:

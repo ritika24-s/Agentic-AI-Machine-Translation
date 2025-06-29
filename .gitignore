@@ -24,3 +24,42 @@ messages.json
 
 *.log
 translation_system.log
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv
+env/
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Data files
+data/cache/
+data/temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Distribution
+build/
+dist/
+*.egg-info/

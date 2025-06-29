@@ -4,8 +4,28 @@ Orchestration Responsibilities:
 Memory management: Update translation memory and conversation context
 Result formatting: Prepare user-friendly output with quality indicators
 Error coordination: Handle failures and route to appropriate recovery strategies
+
+Role: The "Project Manager" - coordinates final output and drives continuous improvement.
+
+Output Coordination:
+- Confidence Scoring: Provides reliability indicators for each translation
+- Alternative Suggestions: When multiple valid translations exist
+- Explanation Generation: Why certain translation choices were made
+- Improvement Recommendations: How to get better results next time
+
+Continuous Learning Engine:
+- Feedback Integration: Learns from user corrections and preferences
+- Performance Analytics: Tracks which agent combinations work best for different content
+- Pattern Recognition: Identifies recurring translation challenges
+- Strategy Optimization: Adjusts routing and processing strategies over time
+
+Business Intelligence:
+- Usage Analytics: Which languages/domains are most requested
+- Quality Trends: Are translations getting better over time?
+- Cost Optimization: Which service combinations provide best value
+- Scalability Insights: When to upgrade services or add capacity
 """
-from AgentArchitecture.States.translation_state import TranslationState
+from agent_architecture.States.translation_state import TranslationState
 
 
 def orchestrator_agent(state: TranslationState) -> dict:

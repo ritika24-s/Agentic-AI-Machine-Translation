@@ -1,9 +1,23 @@
 """
 The Context Manager maintains conversation coherence and translation consistency
+Role: The "Memory Manager" - ensures translations feel natural and consistent across conversations.
+
+Contextual Intelligence:
+- Conversation Threading: Remembers that "it" in message 5 refers to "the contract" from message 2
+- Terminology Consistency: If "user interface" is translated as "interfaz de usuario" once, maintains this choice
+- Cultural Context Mapping: Knows that German business emails are more formal than American ones
+- Temporal Awareness: Understands that "tomorrow" depends on when the conversation started
+
+Memory Architecture:
+- Short-term: Current conversation flow and immediate references
+- Medium-term: Session terminology preferences and style choices
+- Long-term: User/domain-specific translation patterns and preferred terminology
+
+Strategic Value: This is what makes the system "conversational" rather than just translating isolated sentences.
 """
 
-from AgentArchitecture.States.translation_state import TranslationState, get_relevant_context
-from AgentArchitecture.States.conversation_state import ConversationState, get_initial_conversation_state, get_repeated_phrases
+from agent_architecture.States.translation_state import TranslationState, get_relevant_context
+from agent_architecture.States.conversation_state import ConversationState, get_initial_conversation_state, get_repeated_phrases
 
 
 def get_context_strategy(relevant_context: list[str], repeated_phrases: list[tuple[str, str, str]]) -> str:

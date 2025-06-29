@@ -4,9 +4,37 @@ Strategy:
 - Automated checks: Length ratios, untranslated content, terminology consistency
 - Confidence thresholds: Different actions based on quality scores
 - Human escalation: Complex issues automatically flagged for human review
+
+Role: The "Editor-in-Chief" - comprehensive quality assurance using professional translation frameworks.
+Multi-Layer Quality Assessment:
+Layer 1 - Linguistic Quality:
+
+Fluency: Does it sound natural to native speakers?
+Accuracy: Is the meaning preserved correctly?
+Terminology: Are domain-specific terms translated properly?
+
+Layer 2 - Contextual Quality:
+
+Consistency: Same terms translated the same way throughout
+Register: Formal/informal tone matches source and target culture
+Cultural Appropriateness: Idioms, references, cultural concepts
+
+Layer 3 - Technical Quality:
+
+Completeness: Nothing missing, nothing added
+Formatting: Preserves structure, handles special characters
+Localization: Currency, dates, phone numbers in target format
+
+Professional Frameworks:
+
+BLEU/METEOR Scoring: Automated metrics for baseline quality
+DQF (Dynamic Quality Framework): Professional translation industry standard
+Custom Rubrics: Domain-specific quality criteria
+
+Critical Innovation: Most MT systems stop at linguistic accuracy. This agent evaluates like a professional translation agency.
 """
 
-from AgentArchitecture.States.translation_state import TranslationState
+from agent_architecture.States.translation_state import TranslationState
 
 
 def qa_agent(translation_state: TranslationState) -> dict:

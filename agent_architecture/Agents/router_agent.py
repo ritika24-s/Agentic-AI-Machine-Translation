@@ -1,7 +1,23 @@
 """
 The Router Agent is the system's traffic controller, deciding how to handle each translation request
+
+Role: The "CEO" of the translation company - makes strategic decisions about how to handle each translation request.
+
+Core Intelligence:
+- Complexity Analysis: Distinguishes between "Hello" (simple) vs "Please review the arbitration clause in section 4.2b" (complex legal)
+- Domain Detection: Recognizes medical terminology, legal jargon, technical specifications, creative writing
+- Urgency Assessment: Real-time chat vs document translation vs batch processing
+- Resource Allocation: Which agents need to be involved and in what sequence
+
+Decision Framework:
+- Simple Text → Direct to Translation Specialist (fast path)
+- Technical/Domain-Specific → Context Orchestrator + Specialized Translation Specialist
+- Conversational → Full agent team with memory management
+- Creative/Marketing → Cultural adaptation pathway with Quality Guardian emphasis
+
+Key Innovation: Unlike traditional MT that treats all text the same, this agent creates custom workflows for each request type.
 """
-from AgentArchitecture.States.translation_state import TranslationState
+from agent_architecture.States.translation_state import TranslationState
 
 
 TECHNICAL_TERMS = ["api", "database", "algorithm", "function"]
