@@ -1,0 +1,65 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+
+.vscode/
+
+messages.json
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.test.local
+.env.test.production
+.env.test.development
+.env.test.local
+.env.test.production
+
+*.log
+translation_system.log
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv
+env/
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Data files
+data/cache/
+data/temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Distribution
+build/
+dist/
+*.egg-info/
