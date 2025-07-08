@@ -1,4 +1,4 @@
-// Types
+// Types for document upload and processing
 export interface UploadedFile {
     id: string
     file: File

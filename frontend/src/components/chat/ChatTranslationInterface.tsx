@@ -101,7 +101,7 @@ export default function ChatTranslationInterface() {
     setIsTranslating(true)
 
     try {
-      // Call your FastAPI translation endpoint
+      // Call FastAPI translation endpoint
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/translate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

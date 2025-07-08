@@ -1,58 +1,8 @@
-// lib/api.ts - FastAPI Integration
+// FastAPI Integration
 import { io, Socket } from 'socket.io-client'
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000'
-
-// Types matching your FastAPI Pydantic models
-export interface TranslationRequest {
-  text: string
-  source_lang?: string
-  target_lang: string
-  context?: string
-  domain?: string
-  style?: 'formal' | 'informal' | 'technical'
-}
-
-export interface TranslationResponse {
-  translated_text: string
-  source_language: string
-  target_language: string
-  confidence_score: number
-  agent_activities: AgentActivity[]
-  quality_metrics: QualityMetrics
-  translation_id: string
-  processing_time: number
-}
-
-export interface AgentActivity {
-  agent_name: string
-  status: 'waiting' | 'active' | 'completed' | 'error'
-  message: string
-  timestamp: string
-  details?: Record<string, any>
-}
-
-export interface QualityMetrics {
-  accuracy_score: number
-  fluency_score: number
-  adequacy_score: number
-  overall_quality: number
-  mqm_score?: number
-  error_count?: number
-}
-
-export interface ConversationContext {
-  conversation_id: string
-  messages: Array<{
-    text: string
-    translation: string
-    timestamp: string
-    language_pair: string
-  }>
-  terminology: Record<string, string>
-  style_preferences: Record<string, any>
-}
+import { API_BASE_URL, WS_URL } from '../interface/request'
+import { AgentActivity, ConversationContext} from '../interface/chat'
+import { TranslationRequest, TranslationResponse } from '../interface/request'
 
 // API Client Class
 export class TranslationAPI {
@@ -96,13 +46,13 @@ export class TranslationAPI {
 
   // Main translation endpoint
   async translate(request: TranslationRequest): Promise<TranslationResponse> {
-    const response = await fetch(`${this.baseURL}/translate`, {
+    const response = await fetch(`${this.baseURL}/api/v1/translate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(request)
-    })
+    });
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({}))

@@ -1,4 +1,4 @@
-// Types
+// Types for chat messages
 export interface ChatMessage {
     id: string
     type: 'user' | 'assistant' | 'system'
@@ -17,16 +17,31 @@ export interface ChatMessage {
     documentName?: string
 }
   
-export interface QualityMetrics {
-    accuracy_score: number
-    fluency_score: number
-    adequacy_score: number
-    overall_quality: number
-}
-  
 export interface AgentActivity {
     agent_name: string
     status: 'waiting' | 'active' | 'completed' | 'error'
     message: string
     timestamp: string
-}
+    details?: Record<string, any>
+  }
+  
+  export interface QualityMetrics {
+    accuracy_score: number
+    fluency_score: number
+    adequacy_score: number
+    overall_quality: number
+    mqm_score?: number
+    error_count?: number
+  }
+  
+  export interface ConversationContext {
+    conversation_id: string
+    messages: Array<{
+      text: string
+      translation: string
+      timestamp: string
+      language_pair: string
+    }>
+    terminology: Record<string, string>
+    style_preferences: Record<string, string>
+  }

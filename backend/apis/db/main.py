@@ -1,13 +1,6 @@
 # Standard library imports
 import logging
-from typing import Dict, Any, List, Union
-
-
-
-# Local imports
-from agent_architecture.agent_workflow import create_translation_system
-from apis.main import create_app
-
+from typing import Dict, Any
 
 
 def convert_message_to_dict(message: Any) -> Dict[str, Any]:
@@ -31,19 +24,6 @@ def convert_message_to_dict(message: Any) -> Dict[str, Any]:
         return {"content": str(message)}
 
 
-
-# Initialize the translation system once
-translation_system = create_translation_system()
-
-
-
-
-def app_run():
-    app = create_app()
-    app.run(debug=True, port=5000)
-
-if __name__ == "__main__":
-    app_run()
     
     
     
